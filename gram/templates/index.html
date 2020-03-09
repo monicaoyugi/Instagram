@@ -1,0 +1,78 @@
+{%extends 'base.html'%}
+{% block content %}
+{{ block.super}}
+<head>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script>
+        function myFunction() {
+            var copyText = document.getElementById("myInput");
+            navigator.clipboard.writeText(copyText.value)
+            alert("Copied the text: " + copyText.value);
+        }
+    </script> -->
+</head>
+<div class="album py-5">
+    <h1 style="text-align: center; font-size: 80px; font-family: Yeon Sung; color: rgb(38, 43, 44)   ;"> Instagram
+    </h1>
+    <br>
+    <div class="container" style="font-family: ABeeZee;">
+        <div class="row">
+            {% for image in images%}
+            {% with go=image.allinfo %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="background-color: rgb(5, 45, 46);">
+                    <img src='{{image.image.url}}' alt="" class="card-img-top" width="100%" height="225" type="button"
+                        class="btn btn-sm btn-outline-primary" id="image{{image.id}}" data-whatever="{{image.id}}"
+                        data-toggle="modal" data-target="#{{image.id}}">
+                    <div class="card-body" style="text-align: center;">
+                        <p1 style="font-size: 15px; color: rgb(255, 220, 155);">
+                            {{ image.image_description }}
+                        </p1>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+            {% empty %}
+            <h3 class="text-center"> Photos to be posted soon </h3>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{% for image in images %}
+<div style="font-family: ABeeZee;" id="{{image.id}}" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content " style="background-color: rgb(63, 63, 63);">
+            <div class="modal-header">
+                <h4 class="modal-title" id="imagetitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            
+            <div class="modal-body" style="text-align:center; ">
+                <img style="height: 300px; width: 430px;" id="image" class=" rounded text-center"
+                    src='{{image.image.url}}'> </div>
+            <div class="modal-body" style="text-align:center">
+                <p1 style="color: rgb(255, 204, 108);" id="imageimage_description">{{ image.image_description }}</p1>
+                <p><img style="height: 18px;" src="https://www.stickpng.com/assets/thumbs/588891debc2fc2ef3a1860a2.png"
+                        alt="pin">
+                    <small style="color: rgb(255, 230, 184);">{{ image.location }}</small></p>
+                <p style="color: rgb(156, 102, 0);"><small class="text-muted">Posted on: {{image.pub_date}}</small></p>
+                <a target="_blank" href="{{image.image.url}}" id="imagedirectlink" class="btn btn-outline-warning">view
+                    image</a>
+            </div>
+            <div class="modal-footer">
+                <input type="text" class="form-control" id="myInput"
+                    value="https://gallery-expo.herokuapp.com{{image.image.url}}">
+                <button type="button" class="btn btn-info" onclick="myFunction()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+{% endblock %}
