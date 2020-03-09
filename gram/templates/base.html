@@ -1,0 +1,36 @@
+{% load bootstrap3 %}
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% if title %}
+    <title>Instagram - {{title}}</title>
+    {% else %}
+    <title>Instagram</title>
+    {% endif %}
+
+    {% block styles %}
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Yeon+Sung&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% bootstrap_css %}
+        <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    {% endblock %}
+
+</head>
+<body>
+    {% include "navbar.html" %}
+    {% block content%}
+    {% endblock%}
+
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
+</body>
+</html>
