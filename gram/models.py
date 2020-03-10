@@ -9,6 +9,7 @@ from tinymce.models import HTMLField
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='images')
     bio = HTMLField()
+    username=models.CharField(max_length=20,null=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
 
     def __str__(self):
@@ -19,6 +20,7 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
+       
 
     @classmethod
     def update_bio(cls,id,new_bio):
@@ -26,6 +28,11 @@ class Profile(models.Model):
         new_bio_object = cls.objects.get(bio = new_bio)
         new_bio = new_bio_object.bio
         return new_bio
+        
+    @classmethod
+    def get_user(cls,name):
+        usernames=cls.objects.filter(username__icontains=name)
+        return usernames   
 
 
 class Image(models.Model):
