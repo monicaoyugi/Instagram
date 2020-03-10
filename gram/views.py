@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import ImageProfileForm, ImageUploadForm, CommentForm
 from .models import *
 from django.contrib.auth.decorators import login_required
-from vote.managers import VotableManager
+from vote.managers import VotebleManager
 
 
 # Create your views here.
