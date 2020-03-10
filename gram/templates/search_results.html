@@ -1,9 +1,12 @@
 {%extends 'base.html'%}
 {% block content %}
+  {{block.super}}
+
 <div class="container"> <br>
 
   <!-- display images -->
-  {% for user in users %}
+  {% if users %}
+      {% for user in users %}
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
@@ -18,10 +21,13 @@
         </div>
         <div class="col-sm-4"></div>
     </div>
-    {% endfor %}
+       {% endfor %}
+    {% else %}
+    jjhjj
 
-{% else %}
+
 
 <p class="text-center">search results no matches</p>
+{% endif %}
 
 {% endblock %}
