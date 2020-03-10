@@ -37,11 +37,11 @@
           <ul style="padding-right: 15px;" class="nav navbar-nav navbar-right">
             <li>
               <a style="font-size:18px;color:black;" class="glyphicon glyphicon-upload "
-                href="{% url 'new_image' user.id %}">Upload</a>
+                href="{% url 'imageUpload' %}">Upload</a>
             </li>
             <li>
               <a style="font-size:18px;color:black" class="glyphicon glyphicon-user "
-                href="{% url 'profile' user.id %}">Profile</a>
+                href="{% url 'profile'%}">Profile</a>
             </li>
             <li>
               <a style="font-size:18px;color:black" class="glyphicon glyphicon-off " href="/logout">Logout</a>
@@ -56,7 +56,7 @@
   <br>
   <style>
   #grad {
-    background-image: linear-gradient(to right, rgb(50, 195, 240),rgb(108, 210, 162),#D26CD0,#C96CD3,#BC6DDA,#B06EE0,#A26FE5,#966FE9,#8971EF,#8372F1,#7C73F4); 
+    background-image: linear-gradient(to right, rgb(50, 195, 240),rgb(108, 210, 162),#D26CD0,#C96CD3,#BC6DDA,#B06EE0,#A26FE5); 
   } 
   </style>
 </body>

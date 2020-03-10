@@ -10,7 +10,7 @@
             <div class="card" style="width: 30rem;">
                 <span>
                     <img src="{{user.profile.profile_photo.url}}" alt=""
-                        style="border-radius: 50%; width:30px; height:30px; border-color: rgb(11, 123, 189); border-width: 1px;">
+                        style="border-radius: 50%; width:30px; height:5px; border-color: rgb(11, 123, 189); border-width: 1px;">
                 </span>
                 <hr>
                 <span>{{user.profile.bio}}</span>
@@ -23,6 +23,5 @@
 {% else %}
 
 <p class="text-center">search results no matches</p>
-{% endif %}
 
 {% endblock %}
