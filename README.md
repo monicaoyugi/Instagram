@@ -42,7 +42,7 @@ create database instagram
 ```
 
 ## Database diagram
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/5e54c2c6ef8c251a0618867f'> </iframe>
+https://dbdiagram.io/d/5e54c2c6ef8c251a0618867f
 
 ## Install dependencies
 To install the requirements from requirements.txt file,
