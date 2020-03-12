@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.index, name = 'index'),
     path('image/', views.image_upload,name='upload'),
     path('profile',views.profile_info,name='profile'),
+    path('profile_edit', views.profile_edit, name='profile_edit'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('search', views.search_results, name='search_results'),
     path('edit/', views.profile_edit, name='edit'),

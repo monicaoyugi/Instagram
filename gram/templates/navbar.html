@@ -6,59 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <nav id="grad" class="navbar-fixed-top navbar-default">
-    <div class="navbar-collapse ">
-      <div class="row">
-        <!-- ICON -->
-        <div class="col-md-4">
-          <ul class="nav navbar-nav navbar-left">
-            <li> <a style="font-size:30px;color:black"  href="/">
-                <img src="https://seeklogo.com/images/I/instagram-new-2016-glyph-logo-84CB825424-seeklogo.com.png" style="height:32px; width:auto;"alt=""> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1280px-Instagram_logo.svg.png" style="height:32px; width: 100px;" alt=""> </a></li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"><i class="fab fa-4x fa-instagram"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'profile'%}">{{user.username}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout" tabindex="-1" aria-disabled="true">logout </a>
+            </li>
+            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results'%}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_user">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+        </ul>
+        <span><img src="{{user.profile.profile_photo.url}}" alt="" style="border-radius: 50%; width:50px; height:50px; border-color: brown; border-width: 1px;"></span>
+        <!--  -->
+        {% endif %}
 
-        <!-- search -->
-        <div class="col-md-4">
-          <form class="navbar-form form-search" style="background-color: transparent;" role="search"
-            action="{% url 'search_results' %}">
-            <div class="input-group">
-              <input type="text" style="border:1px solid grey" class="form-control" placeholder="Search" name="user">
-              <div class="input-group-btn">
-                <button style="border:1px solid grey; height: 34px;" class="btn btn-default" type="submit"><i
-                    class="glyphicon glyphicon-search" style="text-align: centre;"></i></button>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- NAv -->
-        <div class="col-md-4">
-          <ul style="padding-right: 15px;" class="nav navbar-nav navbar-right">
-            <li>
-              <a style="font-size:18px;color:black;" class="glyphicon glyphicon-upload "
-                href="{% url 'imageUpload' %}">Upload</a>
-            </li>
-            <li>
-              <a style="font-size:18px;color:black" class="glyphicon glyphicon-user "
-                href="{% url 'profile'%}">Profile</a>
-            </li>
-            <li>
-              <a style="font-size:18px;color:black" class="glyphicon glyphicon-off " href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      
-      </div>
     </div>
-  </nav>
-  <br>
-  <br>
-  <style>
-  #grad {
-    background-image: linear-gradient(to right, rgb(50, 195, 240),rgb(108, 210, 162),#D26CD0,#C96CD3,#BC6DDA,#B06EE0,#A26FE5); 
-  } 
-  </style>
+</nav>
+  <!-- <br>
+  <br> -->
 </body>
 </html>
 
