@@ -27,7 +27,7 @@ def image_upload(request):
 def profile_info(request):
     current_user = request.user
     profile_info = Profile.objects.filter(user=current_user).first()
-    posts =  request.user.image_set.all()
+    posts =  request.user.profile.posts.all()
 
     return render(request, 'profile.html',{"images":posts,"profile":profile_info,"current_user":current_user})
 
