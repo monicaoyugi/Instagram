@@ -32,7 +32,7 @@ class Profile(models.Model):
     @classmethod
     def get_user(cls,name):
         usernames=cls.objects.filter(username__icontains=name)
-        return usernames   
+        return usernames
 
 
 class Image(models.Model):
@@ -40,7 +40,7 @@ class Image(models.Model):
     image_name = models.CharField(max_length=50)
     image_caption = models.CharField(max_length=50)
     likes = models.PositiveIntegerField(default=0)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
 
     def save_image(self):
         self.save()

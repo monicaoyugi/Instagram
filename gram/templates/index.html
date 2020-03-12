@@ -9,10 +9,12 @@
             {% for image in images %}
             <div class="card">
                 <a style="text-decoration:none;color:black"href="profile/{{image.owner.id}}">
-                    {% if image.profile.profile_pic.url %}
-            <p><img class="post" src="{{image.profile.profile_pic.url}}" height="100px" width="100px" style="border-radius: 50%; width:50px; height:50px; border-color: brown; border-width: 1px;"><strong>{{image.owner}}</strong>
-                {% else %}
-                <strong>{{image.owner}}</strong>
+                    {% if image.user.profile_photo.url %}
+                    <p><img class="post" src="{{image.user.profile_photo.url}}" height="100px" width="100px" style="border-radius: 50%; width:50px; height:50px; border-color: brown; border-width: 1px;"><strong>{{image.owner}}</strong>
+                    <strong>{{image.user.username}}</strong>
+                    {% else %}
+                    <strong>{{image.user.username}}</strong>
+
                 {% endif %}
             </a>
                 <span class="menu"><a style="text-decoration:none;color:black"href="/comment/{{image.id}}">...</a></span></p>

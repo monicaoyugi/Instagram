@@ -13,6 +13,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('search', views.search_results, name='search_results'),
     path('edit/', views.profile_edit, name='edit'),
-    path('new_comment/', views.add_comment,name='newComment'),
+    path('new_comment/', views.add_comment,name='new_comment'),
+    path('like_images/',views.like_images, name='like_images'),
     path('image_upload/', views.image_upload,name='imageUpload'),
 ]
