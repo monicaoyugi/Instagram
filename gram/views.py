@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .forms import UserCreationForm, ProfileEditForm
+from .forms import UserCreationForm, ProfileEditForm, CommentForm
 
 
 # Create your views here.
@@ -23,7 +25,26 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+@login_required
+def add_comment(request):
+    current_user = request.user
 
+    if request.method == 'POST':
+        c_form = CommentForm(request.POST, instance=request.user)
+    else:
+        c_form = CommentForm(instance=request.user)
+
+    if c_form.is_valid():
+        print(c_form)
+        c_form.save()
+
+        messages.success(
+            request, f'comment created successfully')
+        return redirect('index')
+    context = {
+        'c_form': c_form
+    }
+    return render(request, 'new_comment.html', context)
 @login_required
 def profile_info(request):
     profiles = Profile.objects.filter(user=request.user)
@@ -37,6 +58,15 @@ def profile_info(request):
         "posts":posts
     }
     return render(request, 'profile.html', context)
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['author', 'post', 'body']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 def profile_edit(request):

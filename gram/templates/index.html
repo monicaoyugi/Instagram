@@ -18,10 +18,10 @@
                     <img src="{{post.image.url}}">
                 </section>
                 <section class="btn-group">
-                    <button type="button" class="btn-love"><i  class="far fa-heart fa-lg"></i></button>
-                    <button type="button" class="btn-comment"><i class="far fa-comment fa-lg"></i></button>
-                    <button type="button" class="btn-share"><i class="fas fa-share fa-lg "></i></button>
-                    <button type="button" class="btn-bookmark"><i class="far fa-bookmark fa-lg"></i></button>
+                    <a href="#" type="button" class="btn-love"><i  class="far fa-heart fa-lg"></i></a>
+                    <a href="{% url 'new_comment' %}" type="button" class="btn-comment"><i class="far fa-comment fa-lg"></i></a>
+                    <a type="button" class="btn-share"><i class="fas fa-share fa-lg "></i></a>
+                    <a type="button" class="btn-bookmark"><i class="far fa-bookmark fa-lg"></i></a>
                 </section>
                 <section class="caption">
                     <p class="like"> <i class="fas fa-heart"></i> 20 likes</p>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="">
+        <div class="media-body">
+            <h2 class="account-heading">Post a New Comment</h2>
+        
+          </div>
+        </div>
+        <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
+          {%csrf_token%}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New Comment</legend>
+            {{ form | crispy }}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+          </div>
+        </form>
+    </div>
+{% endblock %}
