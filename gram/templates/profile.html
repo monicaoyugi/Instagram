@@ -26,9 +26,9 @@
 			<div class="profile-stats">
 
 				<ul>
-					<li><span class="profile-stat-count">164</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">206</span> following</li>
+					<li><span class="profile-stat-count">{{posts.count}}</span> posts</li>
+					<!-- <li><span class="profile-stat-count">188</span> followers</li> -->
+					<!-- <li><span class="profile-stat-count">206</span> following</li> -->
 				</ul>
 
 			</div>
@@ -72,7 +72,10 @@
 			</div>
 		<!-- End of gallery -->
 
-		<div class="loader"></div>
+		<!-- <div class="loader"></div> -->
+		{% if posts.count == 0 %}
+			<p>You currenty don't have any posts</p>
+		{% endif %}
 
 	</div>
 	<!-- End of container -->

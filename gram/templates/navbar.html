@@ -10,9 +10,9 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
-    <p><i style="margin-right: 20px;" class="fas fa-home"></i></p>
-    <p><i style="margin-right: 20px;" class="fas fa-compass"></i></p>
-    <p><i style="margin-right: 20px;" class="far fa-heart"></i></p>
-    <a href="{% url 'index' %}"><img style="border-radius:70px; width: 20px;height: 20px;margin-top: -15px;" src="{{user_profile.image.url}}"></a>
+    <a href="{%url 'index'%}" style="cursor: pointer;"><i style="margin-right: 20px;cursor: pointer;font-size: 20px;" class="fas fa-home"></i></a>
+    <a href="{% url 'profile' %}"><i style="margin-right: 20px;font-size: 20px;" class="fas fa-compass"></i></a>
+    <a href="{%url 'index' %}"><i style="margin-right: 20px;font-size: 20px;" class="far fa-heart"></i></a>
+    <a href="{% url 'profile' %}"><img style="border-radius:70px; width: 20px;height: 20px;margin-top: -15px;margin-right: 50px;" src="{{user_profile.image.url}}"></a>
 
   </nav>

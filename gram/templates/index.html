@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {% block content %}
             {% for post in posts %}
-            <div class="feed" style="width: 50%;">
+            <div class="feed" style="width: 50%;box-shadow: 5px #777;border: 1px solid #777;">
                 <section class="username">
                     <div class="image">
                         {% for profile in profiles%}
@@ -18,7 +18,7 @@
                     <img src="{{post.image.url}}">
                 </section>
                 <section class="btn-group">
-                    <button type="button" class="btn-love"><i class="far fa-heart fa-lg"></i></button>
+                    <button type="button" class="btn-love"><i  class="far fa-heart fa-lg"></i></button>
                     <button type="button" class="btn-comment"><i class="far fa-comment fa-lg"></i></button>
                     <button type="button" class="btn-share"><i class="fas fa-share fa-lg "></i></button>
                     <button type="button" class="btn-bookmark"><i class="far fa-bookmark fa-lg"></i></button>
@@ -26,6 +26,12 @@
                 <section class="caption">
                     <p class="like"> <i class="fas fa-heart"></i> 20 likes</p>
                     <p><b><a class="id" href="#">{{post.author.username}}</a></b> {{post.caption}}</p>
+                    {% for comment in comments %}
+                        {% if comment.post == post %}
+                        <p><b><a class="id" href="#">{{comment.author}}</a></b> {{comment.body}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    
                     <p class="time">5 minute ago</p>
                 </section>
             </div>
