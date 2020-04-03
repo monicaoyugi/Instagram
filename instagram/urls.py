@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('gram.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.LogoutView.as_view(
         template_name="logout.html"
     ))

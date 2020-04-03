@@ -1,34 +1,34 @@
 {%extends 'base.html'%}
-{% block content %} 
-{{ block.super}}
-<body>
-    <div class="container "id="con">
-        <br>
-        <div class="col-md-2 col-sm-1 "></div>
-        <div class="col-md-8 col-sm-10 col-xs-12">
-            {% for image in images %}
-            <div class="card">
-                <a style="text-decoration:none;color:black"href="profile/{{image.owner.id}}">
-                    {% if image.user.profile_photo.url %}
-                    <p><img class="post" src="{{image.user.profile_photo.url}}" height="100px" width="100px" style="border-radius: 50%; width:50px; height:50px; border-color: brown; border-width: 1px;"><strong>{{image.owner}}</strong>
-                    <strong>{{image.user.username}}</strong>
-                    {% else %}
-                    <strong>{{image.user.username}}</strong>
-
-                {% endif %}
-            </a>
-                <span class="menu"><a style="text-decoration:none;color:black"href="/comment/{{image.id}}">...</a></span></p>
-            <hr>
-            <img style="margin:0px;" src="{{image.image.url}}" class="img-responsive" alt="Image"><br>
-            <p><strong>@{{image.owner}}</strong> {{image.caption}}</p>
-           <p class="foot"><a href="comment/like/{{image.id}}"><span class="glyphicon glyphicon-heart"></span></a>   
-            0<a style="text-decoration:none;"href="comment/{{image.id}}"><span style="margin-left:5px;" class="glyphicon glyphicon-comment"></span></a></p>
+{% block content %}
+            {% for post in posts %}
+            <div class="feed" style="width: 50%;">
+                <section class="username">
+                    <div class="image">
+                        {% for profile in profiles%}
+                            {% if profile.user == post.author %}
+                            <a href="{% url 'index' %}"><img src="{{profile.image.url}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="id">
+                        <a href="">{{post.author.username}}</a>
+                    </div>
+                </section>
+                <section class="post">
+                    <img src="{{post.image.url}}">
+                </section>
+                <section class="btn-group">
+                    <button type="button" class="btn-love"><i class="far fa-heart fa-lg"></i></button>
+                    <button type="button" class="btn-comment"><i class="far fa-comment fa-lg"></i></button>
+                    <button type="button" class="btn-share"><i class="fas fa-share fa-lg "></i></button>
+                    <button type="button" class="btn-bookmark"><i class="far fa-bookmark fa-lg"></i></button>
+                </section>
+                <section class="caption">
+                    <p class="like"> <i class="fas fa-heart"></i> 20 likes</p>
+                    <p><b><a class="id" href="#">{{post.author.username}}</a></b> {{post.caption}}</p>
+                    <p class="time">5 minute ago</p>
+                </section>
             </div>
-           <br>
             {% endfor %}
-        </div>
-        <di class="col-md- col-sm-1"></di>
-        </div>
-    </div>
-</body>
+  
 {% endblock %}

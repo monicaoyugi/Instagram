@@ -1,1 +1,23 @@
-<p>You have been succesfully signed up.Please go back and login</p>
+{%extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    {{block.super}}
+    <h> You're logged out </h>
+    <div class="container">
+        <small class="text-muted">
+            <a href="{% url 'login' %}" class="ml-2"> Log in again </a>
+        </small>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

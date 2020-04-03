@@ -1,33 +1,82 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <h4 class="user">{{profile.user.username}}</h4>
-            <img src="{{profile.profile_photo.url}}" class="img-thumbnail img-responsive img-fluid" alt="" style="border-radius: 30%; width: 100px; height: 100px; border-color: aqua; ">
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <hr>
-            <p>{{profile.bio}}</p>
+<header>
 
-        </div>
+	<div class="container">
 
-        <div class="col-sm-6 col-md-2">
-            <a href="{%url 'edit'%}" class="btn btn-outline-info btn-sm">Edit your  Profile</a>
-        </div>
-    </div>
-<h2> Photos </h2>
-<hr>
-<div class="row">
-    {% for image in images %}
-    <div class="col-sm-12 col-md-6 col-lg-3">
-        <img src="{{image.image.url}}" alt="" class="img-thumbnail img-responsive img-fluid">
-    </div>
-    {% endfor %}
-</div>
+		<div class="profile">
 
+			<div class="profile-image">
 
-</div>
+				<img src="{{profile.image.url}}" alt="">
+
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name">{{profile.user.username}}</h1>
+
+				<a href="{% url 'profile_edit' %}" class="btn profile-edit-btn">Edit Profile</a>
+
+				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count">164</span> posts</li>
+					<li><span class="profile-stat-count">188</span> followers</li>
+					<li><span class="profile-stat-count">206</span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name"></span> {{profile.profile_caption}}</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+
+            {% for post in posts %}
+                <div class="gallery-item" tabindex="0">
+
+				<img src="{{post.image.url}}" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+            {% endfor %}
+			</div>
+		<!-- End of gallery -->
+
+		<div class="loader"></div>
+
+	</div>
+	<!-- End of container -->
+
+</main>
 
 {% endblock %}

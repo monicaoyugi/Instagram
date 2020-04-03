@@ -93,8 +93,10 @@ As a user of the application I should be able to:
 - See my profile with all my pictures.
 - Follow other users and see their pictures on my timeline.
 - Like a picture and leave a comment on it.
-## Codebeat 
+
+## Codebeat
 [![codebeat badge](https://codebeat.co/badges/dc002ecf-b46e-4aef-a444-6202e6f747db)](https://codebeat.co/projects/github-com-monicaoyugi-instagram-master)
+
 
 
 ## LICENSE

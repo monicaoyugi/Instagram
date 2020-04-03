@@ -1,17 +1,17 @@
 from django import forms
-from . models import Image, Profile,Comments
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django import forms
+from .models import Profile
 
-class ImageUploadForm(forms.ModelForm):
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
     class Meta:
-        model = Image
-        exclude = ['profile', 'comments','user','likes']
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
-class ImageProfileForm(forms.ModelForm):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user']
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comments
-        exclude = ['user','image', 'date_posted']
+        fields = ['image','profile_caption']

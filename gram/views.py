@@ -1,91 +1,62 @@
 from django.shortcuts import render, redirect
-from . forms import ImageProfileForm, ImageUploadForm, CommentForm
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+from .forms import UserCreationForm, ProfileEditForm
 
 
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    images = Image.objects.all()
-    return render(request, 'index.html', {"images":images})
+    user = request.user
+    user_profile = Profile.objects.get(user=user)
+    posts = Post.objects.all()
+    profiles = Profile.objects.all()
+    context = {
+        "posts": posts,
+        "profiles": profiles,
+        "user_profile":user_profile
+    }
+    return render(request, 'index.html', context)
 
-def image_upload(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST,request.FILES)
-        if form.is_valid():
-            image = form.save(commit=False)
-            image.user = current_user
-            image.save()
-        return redirect('index')
-    else:
-        form = ImageUploadForm()
-        return render(request,'upload.html', {"form":form})
 
+@login_required
 def profile_info(request):
-    current_user = request.user
-    profile_info = Profile.objects.filter(user=current_user).first()
-    posts =  request.user.profile.posts.all()
-
-    return render(request, 'profile.html',{"images":posts,"profile":profile_info,"current_user":current_user})
-
+    profiles = Profile.objects.filter(user=request.user)
+    if not profiles.first():
+        profile = Profile.objects.create(user=request.user)
+        profile.save()
+    profile = Profile.objects.get(user=request.user)
+    posts = Post.objects.filter(author=request.user)
+    context = {
+        "profile": profile,
+        "posts":posts
+    }
+    return render(request, 'profile.html', context)
 
 
 def profile_edit(request):
     current_user = request.user
+
     if request.method == 'POST':
-        form = ImageProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            image = form.save(commit=False)
-            image.user = current_user
-            image.save()
-        return redirect('profile')
-
+        p_form = ProfileEditForm(
+            request.POST, request.FILES,instance=request.user.profile
+        )
     else:
-        form = ImageProfileForm()
-        return render(request,'edit.html',{"form":form})
+        p_form = ProfileEditForm(instance=request.user.profile)
 
+    if  p_form.is_valid():
+        p_form.save()
 
-
-def comments(request,id):
-    comments = Comments.get_comments(id)
-    number = len(comments)
-    return render(request,'comments.html',{"comments":comments,"number":number})
-
-
-
-
-def add_comment(request,id):
-    current_user = request.user
-    image = Image.get_single_photo(id=id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        print(form)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = current_user
-            comment.image_id = id
-            comment.save()
-        return redirect('index')
-
-    else:
-        form = CommentForm()
-        return render(request,'new_comment.html',{"form":form,"image":image})
-
-@login_required (login_url='/accounts/register/')
-def like_images(request,id):
-    image =  Image.get_single_photo(id)
-    user = request.user
-    user_id = user.id
-    if user.is_authenticated:
-        uplike = image.votes.up(user_id)
-        image.likes = image.votes.count()
-        image.save()
-    return redirect('index')
-
-
+        messages.success(
+            request, f'Your profile has been updated successfully')
+        return redirect('profile_edit')
+    context = {
+        'p_form': p_form
+    }
+    return render(request, 'edit_profile.html', context)
 
 def search_results(request):
 
@@ -98,4 +69,20 @@ def search_results(request):
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search_results.html',{"message":message})
+        return render(request, 'search_results.html', {"message": message})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data('username')
+            messages.success(f'account for {username} created successfully')
+            print(form.cleaned_data)
+            profile = Profile.objects.create(user=form.cleaned_data)
+            profile.save()
+            return redirect('login')
+        else:
+            form = UserCreationForm()
+        return render(request, 'registration/registration.html', {form:form})
